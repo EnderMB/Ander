@@ -47,7 +47,7 @@ constructor(
     }
 
     private fun getGift(giftId: String){
-        giftRepository.getGiftId(giftId).onEach { result ->
+        giftRepository.getGiftbyId(giftId).onEach { result ->
             when(result){
                 is Result.Error -> {
                     _state.value = GiftDetailState(error = result.message ?:"Unexpected error")

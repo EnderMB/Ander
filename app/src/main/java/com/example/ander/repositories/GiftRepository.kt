@@ -36,7 +36,7 @@ constructor(
         }
     }
 
-    fun getGiftId(giftId: String): Flow<Result<Gift>> = flow{
+    fun getGiftbyId(giftId: String): Flow<Result<Gift>> = flow{
         try {
             emit(Result.Loading<Gift>())
 

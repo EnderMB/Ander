@@ -2,6 +2,7 @@ package com.example.ander.views.giftD
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -10,11 +11,12 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.ander.views.viewmodel.GiftDetailState
+import kotlin.reflect.KFunction4
 
 @Composable
 fun GiftDetailScreen(
     state: GiftDetailState,
-    addNewGift: (String, String) -> Unit,
+    addNewGift: KFunction4<String, String, String, String, Unit>,
     updateGift: (String, String) -> Unit,
 ) {
     var nom by remember(state.gift?.nom) { mutableStateOf(state.gift?.nom ?: "") }
@@ -66,13 +68,13 @@ fun GiftDetailScreen(
             if (state.isLoading) {
                 CircularProgressIndicator(
                     modifier = Modifier
-                        .align(Alignment.Center))
+                        /*.align(Alignment.Center)*/)
             } else {
                 if (state.gift?.id != null) {
                     Button(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .align(Alignment.BottomCenter),
+                            /*.align(Alignment.BottomCenter)*/,
                         onClick = {
                             updateGift(nom, precio)
                         },
@@ -89,7 +91,7 @@ fun GiftDetailScreen(
                     Button(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .align(Alignment.BottomCenter),
+                            /*.align(Alignment.BottomCenter)*/,
                         onClick = {
                             addNewGift(nom, precio)
                         },
