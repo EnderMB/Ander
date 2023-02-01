@@ -1,4 +1,4 @@
-package com.example.ander.ui.gifts
+package com.example.ander.gifts
 data class User (
     val id: String,
     val nom: String,

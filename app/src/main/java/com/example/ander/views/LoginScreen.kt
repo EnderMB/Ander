@@ -1,4 +1,4 @@
-package com.example.ander.ui.login.ui
+package com.example.ander.views.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -18,43 +18,45 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.ander.R
+import com.example.ander.views.LoginViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun LoginScreen(viewModel: LoginViewModel){
+fun LoginScreen(viewModel: LoginViewModel) {
     Box(
         Modifier
             .fillMaxSize()
-            .padding(16.dp)){
+            .padding(16.dp)
+    ) {
         //Colocamos el parametro de align en esta parte para que afecte al hijo abajo
-            Login(Modifier.align(Alignment.Center), viewModel)
+        Login(Modifier.align(Alignment.Center), viewModel)
     }
 }
 
 @Composable
 fun Login(align: Modifier, viewModel: LoginViewModel) {
 
-    val email : String by viewModel.email.observeAsState(initial = "")
-    val pass : String by viewModel.pass.observeAsState(initial = "")
-    val loginEnable:Boolean by viewModel.loginEnable.observeAsState(initial = false)
-    val isLoading:Boolean by viewModel.isLoading.observeAsState(initial = false)
+    val email: String by viewModel.email.observeAsState(initial = "")
+    val pass: String by viewModel.pass.observeAsState(initial = "")
+    val loginEnable: Boolean by viewModel.loginEnable.observeAsState(initial = false)
+    val isLoading: Boolean by viewModel.isLoading.observeAsState(initial = false)
     val coroutineScope = rememberCoroutineScope()
 
-    if (isLoading){
-        Box(Modifier.fillMaxSize()){
+    if (isLoading) {
+        Box(Modifier.fillMaxSize()) {
             CircularProgressIndicator(Modifier.align(Alignment.Center))
         }
-    }else{
+    } else {
         Column(modifier = Modifier) {
             HeaderImage(Modifier.align(Alignment.CenterHorizontally))
 
             Spacer(modifier = Modifier.padding(16.dp))
 
-            MailField(email) {viewModel.onLoginChanged(it, pass)}
+            MailField(email) { viewModel.onLoginChanged(it, pass) }
 
             Spacer(modifier = Modifier.padding(16.dp))
 
-            PassField(pass) {viewModel.onLoginChanged(email, it)}
+            PassField(pass) { viewModel.onLoginChanged(email, it) }
 
             Spacer(modifier = Modifier.padding(8.dp))
 
@@ -62,10 +64,11 @@ fun Login(align: Modifier, viewModel: LoginViewModel) {
 
             Spacer(modifier = Modifier.padding(16.dp))
 
-            LoginButton(loginEnable){
+            LoginButton(loginEnable) {
                 coroutineScope.launch {
-                    viewModel.onLoginSelected() }
-               }
+                    viewModel.onLoginSelected()
+                }
+            }
         }
     }
 }
@@ -74,7 +77,7 @@ fun Login(align: Modifier, viewModel: LoginViewModel) {
 //Controlamos el estado llamando a la funcion de loginSelected (Principio singleSourceOfTrue)
 fun LoginButton(loginEnable: Boolean, onLoginSelected: () -> Unit) {
     Button(
-        onClick = {onLoginSelected},
+        onClick = { onLoginSelected },
         modifier = Modifier
             .fillMaxWidth()
             .height(48.dp),
@@ -91,8 +94,9 @@ fun LoginButton(loginEnable: Boolean, onLoginSelected: () -> Unit) {
 
 @Composable
 fun ForgotPass(modifier: Modifier) {
-    Text(text = "Forgot your Pass?",
-        modifier = modifier.clickable{},
+    Text(
+        text = "Forgot your Pass?",
+        modifier = modifier.clickable {},
         fontSize = 10.sp,
         fontWeight = FontWeight.Bold,
         color = Color(0xFF642EB4)
@@ -101,8 +105,9 @@ fun ForgotPass(modifier: Modifier) {
 
 @Composable
 fun PassField(pass: String, onTextFieldChanged: (String) -> Unit) {
-    TextField(value =pass, onValueChange = {onTextFieldChanged(it)},
-    placeholder = { Text(text = "Password")},
+    TextField(
+        value = pass, onValueChange = { onTextFieldChanged(it) },
+        placeholder = { Text(text = "Password") },
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         singleLine = true,
@@ -118,11 +123,12 @@ fun PassField(pass: String, onTextFieldChanged: (String) -> Unit) {
 }
 
 @Composable
-fun MailField(email: String, onTextFieldChanged:(String) -> Unit) {
+fun MailField(email: String, onTextFieldChanged: (String) -> Unit) {
 
-    TextField(value = email, onValueChange = {onTextFieldChanged(it)},
+    TextField(
+        value = email, onValueChange = { onTextFieldChanged(it) },
         modifier = Modifier.fillMaxWidth(),
-        placeholder = { Text(text ="Mail") },
+        placeholder = { Text(text = "Mail") },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
         //para que no crezca el componenete al clicarlo
         singleLine = true,
@@ -138,8 +144,9 @@ fun MailField(email: String, onTextFieldChanged:(String) -> Unit) {
 
 @Composable
 fun HeaderImage(modifier: Modifier) {
-    Image(painter = painterResource(id = R.drawable.gifticon),
+    Image(
+        painter = painterResource(id = R.drawable.gifticon),
         contentDescription = "Header",
-    modifier = modifier
+        modifier = modifier
     )
 }

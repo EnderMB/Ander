@@ -1,4 +1,4 @@
-package com.example.ander.ui.login.ui
+package com.example.ander.views
 
 import android.util.Patterns
 import androidx.lifecycle.LiveData
@@ -7,24 +7,24 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.delay
 
 //Para crear estados
-class LoginViewModel: ViewModel(){
+class LoginViewModel : ViewModel() {
 
     //_ para indicar que es la privada
     private val _email = MutableLiveData<String>()
-    val email : LiveData<String> = _email
+    val email: LiveData<String> = _email
 
     private val _pass = MutableLiveData<String>()
-    val pass : LiveData<String> = _pass
+    val pass: LiveData<String> = _pass
 
     //para habilitar o deshabilitar boton de login
     private val _loginEnable = MutableLiveData<Boolean>()
-    val loginEnable : LiveData<Boolean> = _loginEnable
+    val loginEnable: LiveData<Boolean> = _loginEnable
 
     private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading : LiveData<Boolean> = _isLoading
+    val isLoading: LiveData<Boolean> = _isLoading
 
     //validar
-    fun onLoginChanged(email: String, pass: String){
+    fun onLoginChanged(email: String, pass: String) {
         _email.value = email
         _pass.value = pass
         _loginEnable.value = isValidEmail(email) && isValidPass(pass)
@@ -32,7 +32,8 @@ class LoginViewModel: ViewModel(){
 
     private fun isValidPass(pass: String): Boolean = pass.length > 6
 
-    private fun isValidEmail(email: String): Boolean = Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    private fun isValidEmail(email: String): Boolean =
+        Patterns.EMAIL_ADDRESS.matcher(email).matches()
 
     //corrutina
     suspend fun onLoginSelected() {
