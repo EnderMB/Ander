@@ -2,9 +2,7 @@ package com.example.ander.views.giftD
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -78,13 +76,13 @@ fun GiftDetailScreen(
             if (state.isLoading) {
                 CircularProgressIndicator(
                     modifier = Modifier
-                        /*.align(Alignment.Center)*/)
-            } else {
+                        .padding(150.dp))
+                } else {
                 if (state.gift?.id != null) {
                     Button(
                         modifier = Modifier
                             .fillMaxWidth()
-                            /*.align(Alignment.BottomCenter)*/,
+                            .padding(150.dp),
                         onClick = {
                             updateGift(nom, precio)
                         },
@@ -101,9 +99,9 @@ fun GiftDetailScreen(
                     Button(
                         modifier = Modifier
                             .fillMaxWidth()
-                            /*.align(Alignment.BottomCenter)*/,
+                            .padding(150.dp),
                         onClick = {
-                            addNewGift(nom, precio, desc)
+                            addNewGift(nom, precio, desc, "")
                         },
                         colors = ButtonDefaults.buttonColors(
                             backgroundColor = Color(0xFF9A6EDA)

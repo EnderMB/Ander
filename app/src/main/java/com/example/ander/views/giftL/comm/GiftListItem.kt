@@ -15,6 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
+import com.example.ander.R
 import com.example.ander.gifts.Gift
 
 @ExperimentalMaterialApi
@@ -23,7 +24,7 @@ fun GiftListItem(
     gift: Gift,
     onItemClick: (String) -> Unit
 ) {
-    Card(){
+    Card{
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -31,7 +32,7 @@ fun GiftListItem(
                 .clickable { onItemClick(gift.id) }
         ){
             Image(
-                painter = rememberImagePainter(gift.img),
+                painter = rememberImagePainter(R.drawable.gifticon),
                 contentDescription = "",
                 modifier = Modifier
                     .width(86.dp)
