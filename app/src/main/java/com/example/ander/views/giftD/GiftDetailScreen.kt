@@ -21,6 +21,7 @@ fun GiftDetailScreen(
 ) {
     var nom by remember(state.gift?.nom) { mutableStateOf(state.gift?.nom ?: "") }
     var precio by remember(state.gift?.precio) { mutableStateOf(state.gift?.precio ?: "") }
+    var desc by remember(state.gift?.desc) { mutableStateOf(state.gift?.desc ?: "") }
 
     Box(
         modifier = Modifier
@@ -41,7 +42,6 @@ fun GiftDetailScreen(
                 }
             )
 
-
             OutlinedTextField(modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 8.dp),
@@ -49,6 +49,16 @@ fun GiftDetailScreen(
                 onValueChange = { nom = it },
                 label = {
                     Text(text = "Price")
+                }
+            )
+
+            OutlinedTextField(modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp),
+                value = desc,
+                onValueChange = { desc = it },
+                label = {
+                    Text(text = "Description")
                 }
             )
 
@@ -93,7 +103,7 @@ fun GiftDetailScreen(
                             .fillMaxWidth()
                             /*.align(Alignment.BottomCenter)*/,
                         onClick = {
-                            addNewGift(nom, precio)
+                            addNewGift(nom, precio, desc)
                         },
                         colors = ButtonDefaults.buttonColors(
                             backgroundColor = Color(0xFF9A6EDA)
